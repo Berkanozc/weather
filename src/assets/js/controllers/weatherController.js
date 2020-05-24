@@ -14,22 +14,38 @@ class WeatherController{
     async setup(data){
         this.weatherView = $(data);
 
-        // Get current location from user
-        console.log(position);
-        // Get weather with current location
-        const weather = this.weatherRepository.getWeatherForCoordinates(
+        let weatherPromise;
+        // When something is wrong while fetching data the page will refresh
+        try{
+            weatherPromise = this.getWeatherPromise();
+        } catch (e) {
+            window.location.reload();
+        }
+
+        // Resolve promise
+        await weatherPromise.then((result) => this.weather = result);
+
+        // Get Background with current city name
+        this.backgroundController = new BackgroundController();
+        await this.backgroundController.getBackgroundFor(this.weather['weather'][0]['main']);
+
+        // Add weather data to dom
+        $(".content").empty().append(this.weatherView);
+        this.addToDom(this.weather);
+    }
+
+    getWeatherPromise(){
+        return this.weatherRepository.getWeatherForCoordinates(
             position.coords.latitude,
             position.coords.longitude
         );
-
-        console.log(weather);
-        // Add weather data to dom
-
-        $(".content").empty().append(this.weatherView);
     }
 
-    async getUserLocation(){
-        return navigator.geolocation.getCurrentPosition();
+    addToDom(result){
+        $("#temperature").text(Math.round((result['main']['temp'] * 100) / 100) + '℃');
+        $("#status").text(result['weather'][0]['description']);
+        $("#place").text(`Weather for ${result['name']}`);
+        $("#icon").attr('src', 'assets/img/weatherIcons/' + result['weather'][0].icon + '.svg');
     }
 
     error(error){

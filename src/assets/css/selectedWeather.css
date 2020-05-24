@@ -1,0 +1,30 @@
+.selected-weather{
+    margin: 16px auto 0;
+}
+
+.selected-weather div div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected-weather h1, h2, h3, img{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.selected-weather h1 {
+    letter-spacing: 2px;
+}
+
+#status:first-letter {
+    text-transform: uppercase;
+}
+
+.separator{
+    width: 90%;
+    height: 2px;
+    background-color: white;
+    border-radius: 50px;
+}

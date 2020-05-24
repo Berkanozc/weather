@@ -1,8 +1,8 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "dependencies": {},
-  "devDependencies": {
-    "dotenv": "^8.2.0"
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   }
 }

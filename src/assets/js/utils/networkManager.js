@@ -13,11 +13,13 @@ class NetworkManager{
      * @returns {Promise<unknown>}
      */
     request(url, type, data = {}){
-        console.log(url)
+        const json = JSON.stringify(data);
+
         return new Promise((resolve, reject) => {
             $.ajax({
                 url: url,
                 type: type,
+                data: json,
                 dataType: 'json',
                 contentType: 'application/json; charset=UTF-8',
                 success: resolve,

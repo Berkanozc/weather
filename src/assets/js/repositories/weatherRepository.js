@@ -1,11 +1,9 @@
-const APP_ID = "aa811a502089591a0c78c88881ccd72d";
-
 class WeatherRepository{
     /**
      * This constructor sets the base url and creates an instance of NetworkManager class
      */
     constructor() {
-        this.baseUrl = "http://api.openweathermap.org/data/2.5/weather";
+        this.baseUrl = "http://localhost:3000/weather";
         this.networkManager = new NetworkManager();
     }
 
@@ -19,7 +17,6 @@ class WeatherRepository{
     }
 
     async getWeatherForCoordinates(lat, lon){
-        console.log(`${this.baseUrl}?lat=${lat}&lon=${lon}&appid=${APP_ID}`)
-        return await this.networkManager.request(`${this.baseUrl}?lat=${lat}&lon=${lon}&appid=${APP_ID}`, "GET")
+        return await this.networkManager.request(`${this.baseUrl}/current`, "POST", {latitude: lat, longitude: lon})
     }
 }

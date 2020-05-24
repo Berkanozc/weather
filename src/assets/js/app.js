@@ -1,4 +1,5 @@
 const WEATHER_CONTROLLER = "weather";
+const BACKGROUND_CONTROLLER = "background";
 const networkManager = new NetworkManager();
 
 class App {
