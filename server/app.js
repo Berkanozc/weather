@@ -42,10 +42,6 @@ app.post("/weather/current", (req, res) => {
     getWeather()
 });
 
-app.post("/weather/city", (req, res) =>{
-    res.status(httpOkCode).json({"Test": "werkt"});
-});
-
 app.post("/background", (req, res) =>{
 
     const getBackground = () => {
